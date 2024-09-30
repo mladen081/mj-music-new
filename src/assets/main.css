@@ -1,0 +1,142 @@
+@import './base.css';
+
+main {
+  padding-top: 4rem;
+}
+
+h1 {
+  color: #fff;
+  font-size: 5rem;
+  text-align: center;
+  font-weight: 900;
+}
+
+h2 {
+  color: #ffd432;
+  font-size: 3rem;
+  text-align: center;
+  font-family: 'Marck Script', cursive;
+  font-weight: 700;
+  font-style: normal;
+}
+
+p {
+  font-size: 2rem;
+  text-align: center;
+  font-weight: 300;
+}
+
+a {
+  text-decoration: none;
+}
+
+.container {
+  background-color: #141417;
+  padding: 4rem 12rem;
+  color: #fff;
+}
+
+.btn-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+button {
+  font-family: 'Alegreya', serif;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  padding: 1rem 2rem;
+  border: 2px solid #fff;
+  border-radius: 0.6rem;
+  background-color: #fff;
+  width: 18rem;
+  color: #141417;
+}
+
+button:disabled {
+  color: rgba(0, 0, 0, 0.8);
+}
+
+button:hover {
+  background-color: transparent;
+  border: 2px solid #ffd432;
+  color: #ffd432;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 20rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+label,
+input,
+select {
+  font-size: 2rem;
+}
+
+input,
+select {
+  margin: 1rem;
+  background-color: #fff !important;
+  padding: 1rem;
+  width: 30rem;
+  border: 2px solid #000;
+  border-radius: 0.6rem;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #ffd432;
+}
+
+::placeholder {
+  color: #000;
+  opacity: 0.8;
+}
+
+@media (max-width: 1600px) {
+  h1 {
+    font-size: 4rem;
+  }
+  h2 {
+    font-size: 2.5rem;
+  }
+  a {
+    font-size: 1.7rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  h1 {
+    font-size: 3rem;
+  }
+  h2 {
+    font-size: 2rem;
+  }
+  a {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 767px) {
+  main {
+    padding-top: 4rem;
+  }
+  .container {
+    padding: 4rem 1rem;
+  }
+  .btn-holder {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,266 @@
+<template>
+  <header :class="{ 'scrolled-nav': scrolledNav }">
+    <nav>
+      <div class="branding">
+        <router-link class="link" to="/">MJ Music</router-link>
+      </div>
+
+      <ul v-show="!mobile" class="navigation">
+        <li v-if="isAdmin">
+          <router-link class="link" exact-active-class="active-tab" to="/delete-user"
+            >Admin</router-link
+          >
+        </li>
+        <li>
+          <router-link class="link" exact-active-class="active-tab" to="/playlist"
+            >Playlist</router-link
+          >
+        </li>
+        <li v-if="isAuth">
+          <router-link class="link" exact-active-class="active-tab" to="/todos">Todos</router-link>
+        </li>
+        <li v-if="!isAuth">
+          <router-link class="link" exact-active-class="active-tab" to="/register"
+            >Register</router-link
+          >
+        </li>
+        <li v-if="!isAuth">
+          <router-link class="link" exact-active-class="active-tab" to="/login">Login</router-link>
+        </li>
+        <li v-if="isAuth">
+          <router-link class="link" @click="handleLogout" to="#">Logout</router-link>
+        </li>
+      </ul>
+
+      <div class="icon">
+        <i
+          v-show="mobile"
+          class="far fa-bars"
+          :class="{ 'icon-active': mobileNav }"
+          @click="toggleMobileNav"
+        ></i>
+      </div>
+
+      <transition name="mobile-nav">
+        <ul v-show="mobileNav" class="dropdown-nav">
+          <li v-if="isAdmin">
+            <router-link class="link" exact-active-class="active-tab" to="/delete-user"
+              >Admin</router-link
+            >
+          </li>
+          <li>
+            <router-link class="link" exact-active-class="active-tab" to="/playlist"
+              >Playlist</router-link
+            >
+          </li>
+          <li v-if="isAuth">
+            <router-link class="link" exact-active-class="active-tab" to="/todos"
+              >Todos</router-link
+            >
+          </li>
+          <li v-if="!isAuth">
+            <router-link class="link" exact-active-class="active-tab" to="/register"
+              >Register</router-link
+            >
+          </li>
+          <li v-if="!isAuth">
+            <router-link class="link" exact-active-class="active-tab" to="/login"
+              >Login</router-link
+            >
+          </li>
+          <li v-if="isAuth">
+            <router-link class="link" @click="handleLogout" to="#">Logout</router-link>
+          </li>
+        </ul>
+      </transition>
+    </nav>
+  </header>
+</template>
+
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useAuthStore } from '../stores/authStore'
+import { useRouter } from 'vue-router'
+
+const authStore = useAuthStore()
+const router = useRouter()
+
+// Check login status
+authStore.checkLogin()
+
+// Use computed to determine if the user is authenticated
+const isAuth = computed(() => !!authStore.user)
+
+// Use computed to determine if the user is ROLE_ADMIN
+const isAdmin = computed(() => authStore.role === 'ROLE_ADMIN')
+
+const handleLogout = () => {
+  authStore.logout()
+  router.push('/login')
+}
+
+const scrolledNav = ref(false)
+const mobile = ref(false)
+const mobileNav = ref(false)
+const windowWidth = ref(window.innerWidth)
+
+const toggleMobileNav = () => {
+  mobileNav.value = !mobileNav.value
+}
+
+const updateScroll = () => {
+  const scrollPosition = window.scrollY
+  scrolledNav.value = scrollPosition > 50
+}
+
+const checkScreen = () => {
+  windowWidth.value = window.innerWidth
+  mobile.value = windowWidth.value <= 767
+  if (!mobile.value) {
+    mobileNav.value = false
+  }
+}
+
+onMounted(() => {
+  window.addEventListener('resize', checkScreen)
+  window.addEventListener('scroll', updateScroll)
+  checkScreen()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', checkScreen)
+  window.removeEventListener('scroll', updateScroll)
+})
+</script>
+
+<style scoped>
+header {
+  width: 100%;
+  position: fixed;
+  color: #fff;
+  background-color: #141417;
+}
+
+header nav {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  padding: 1.7rem 0;
+  width: 99%;
+  margin: 0 auto;
+}
+
+header nav ul,
+header nav ul .link,
+header nav .branding .link {
+  font-weight: 700;
+  color: #fff;
+  list-style: none;
+  text-decoration: none;
+}
+
+header nav ul li {
+  margin-left: 1.6rem;
+}
+
+header nav ul li .link,
+header nav .branding .link {
+  font-size: 2rem;
+  transition: 0.5s ease all;
+  padding-bottom: 0.4rem;
+  border-bottom: 0.1rem solid transparent;
+}
+header nav .branding .link {
+  padding-left: 1rem;
+}
+
+header nav ul li .link:hover,
+header nav .branding .link:hover header nav ul li .link:focus,
+header nav .branding .link:focus {
+  color: #ffd432;
+}
+
+header nav .navigation {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: flex-end;
+  padding-right: 2rem;
+}
+
+header nav .navigation li.active-tab .link {
+  color: #ffd432;
+}
+
+header nav .dropdown-nav li .link:hover,
+header nav .dropdown-nav li .link:focus,
+header nav .dropdown-nav li.active-tab .link {
+  color: #ffd432;
+}
+
+header nav .icon {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 2.4rem;
+  height: 100%;
+}
+
+header nav .icon i {
+  cursor: pointer;
+  font-size: 2.4rem;
+  transition: 0.8s ease all;
+}
+
+header nav .icon-active {
+  transform: rotate(180deg);
+}
+
+header nav .dropdown-nav {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  width: 100%;
+  max-width: 80%;
+  height: max-content;
+  padding: 1.3rem 0;
+  background-color: rgba(38, 40, 45, 0.99);
+  top: 0%;
+  left: 0;
+  border-right: 0.1rem solid #fff;
+  border-bottom: 0.1rem solid #fff;
+  border-radius: 1rem;
+}
+
+header nav .dropdown-nav li {
+  margin-left: 0;
+  margin-top: 1.5rem;
+}
+header nav .dropdown-nav li .link {
+  color: #fff;
+  padding-left: 0.6rem;
+}
+
+header nav .mobile-nav-enter-active,
+header nav .mobile-nav-leave-active {
+  transition: 1s ease all;
+}
+
+header nav .mobile-nav-enter-from,
+header nav .mobile-nav-leave-to {
+  transform: translateX(-30rem);
+}
+
+header nav .mobile-nav-enter-to {
+  transform: translateX(0);
+}
+
+.scrolled-nav {
+  background-color: #141417;
+}
+
+header nav ul li .active-tab {
+  color: #ffd432;
+}
+</style>
