@@ -26,6 +26,7 @@ export const useAuthStore = defineStore('auth', {
         this.role = response.data.role // Store role in the state
       } catch (error) {
         console.error(error)
+        throw error // Re-throw the error to be caught in the component
       }
     },
     logout() {

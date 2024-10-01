@@ -48,7 +48,7 @@ button {
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-size: 2rem;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem;
   border: 2px solid #fff;
   border-radius: 0.6rem;
   background-color: #fff;
@@ -90,7 +90,7 @@ input,
 select {
   margin: 1rem;
   background-color: #fff !important;
-  padding: 1rem;
+  padding: 0.7rem;
   width: 30rem;
   border: 2px solid #000;
   border-radius: 0.6rem;
@@ -104,6 +104,37 @@ select:focus {
 ::placeholder {
   color: #000;
   opacity: 0.8;
+}
+
+.spinner {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ffd432;
+  animation: fadeOut 2s infinite alternate;
+}
+
+.success-message {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ffd432;
+}
+
+.error-message {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #ffd432;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
 }
 
 @media (max-width: 1600px) {

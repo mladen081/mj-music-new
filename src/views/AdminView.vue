@@ -57,7 +57,6 @@ const listUsers = async () => {
 const removeUser = async (userId) => {
   try {
     await deleteUser(userId)
-    console.log('BRAVO, USPESNO STE OBRISALI USERA')
     listUsers()
   } catch (error) {
     console.error('Error deleting user:', error)
