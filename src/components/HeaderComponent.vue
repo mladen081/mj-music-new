@@ -17,6 +17,11 @@
           >
         </li>
         <li v-if="isAuth">
+          <router-link class="link" exact-active-class="active-tab" to="/contact"
+            >Contact</router-link
+          >
+        </li>
+        <li v-if="isAuth">
           <router-link class="link" exact-active-class="active-tab" to="/todos">Todos</router-link>
         </li>
         <li v-if="!isAuth">
@@ -53,6 +58,12 @@
               >Playlist</router-link
             >
           </li>
+          <li v-if="isAuth">
+            <router-link class="link" exact-active-class="active-tab" to="/contact"
+              >Contact</router-link
+            >
+          </li>
+
           <li v-if="isAuth">
             <router-link class="link" exact-active-class="active-tab" to="/todos"
               >Todos</router-link

@@ -82,12 +82,14 @@ form {
 
 label,
 input,
-select {
+select,
+textarea {
   font-size: 2rem;
 }
 
 input,
-select {
+select,
+textarea {
   margin: 1rem;
   background-color: #fff !important;
   padding: 0.7rem;
@@ -97,7 +99,8 @@ select {
 }
 
 input:focus,
-select:focus {
+select:focus,
+textarea:focus {
   outline: 2px solid #ffd432;
 }
 

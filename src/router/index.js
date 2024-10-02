@@ -5,6 +5,7 @@ import ListTodoComponent from '../components/ListTodoComponent.vue'
 import TodoComponent from '../components/TodoComponent.vue'
 import HomeView from '../views/HomeView.vue'
 import PlayList from '../views/PlayList.vue'
+import ContactView from '@/views/ContactView.vue'
 import AdminView from '@/views/AdminView.vue'
 import { useAuthStore } from '../stores/authStore'
 
@@ -20,6 +21,15 @@ const routes = [
     //   authStore.checkLogin() // Ensure we check login status
     //   return authStore.user ? next() : next('/')
     // }
+  },
+  {
+    path: '/contact',
+    component: ContactView,
+    beforeEnter: (to, from, next) => {
+      const authStore = useAuthStore() // Access the auth store
+      authStore.checkLogin() // Ensure we check login status
+      return authStore.user ? next() : next('/')
+    }
   },
   {
     path: '/delete-user',
