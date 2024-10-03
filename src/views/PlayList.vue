@@ -52,27 +52,27 @@ export default {
       songs: [
         {
           title: '1. Song 1',
-          artist: 'Toto',
+          artist: 'A T',
           src: '/s1.mp3'
         },
         {
           title: '2. Song 2',
-          artist: 'Queen',
+          artist: 'A T',
           src: '/s2.mp3'
         },
         {
           title: '3. Song 3',
-          artist: 'Unknown',
+          artist: 'A T',
           src: '/s3.mp3'
         },
         {
           title: '4. Song 4',
-          artist: 'Toto',
+          artist: 'M G',
           src: '/s4.mp3'
         },
         {
           title: '5. Song 5',
-          artist: 'Unknown',
+          artist: 'M G',
           src: '/s5.mp3'
         }
       ],
@@ -271,7 +271,7 @@ button {
 .progress-bar {
   width: 50%;
   height: 0.3rem;
-  background-color: #fff;
+  background-color: rgba(255, 212, 50, 0.5);
   margin: 1.6rem auto;
   border-radius: 0.6rem;
   --progress: 0;
