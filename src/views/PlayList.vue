@@ -23,7 +23,7 @@
           <h2 class="song-title" @click="resetSong(current)">
             {{ current.title }} - {{ current.artist }}
           </h2>
-          <div class="progress-bar">
+          <div class="progress-bar" @click="seek">
             <div class="progress" :style="{ width: progress + '%' }"></div>
           </div>
           <div>
@@ -91,10 +91,8 @@ export default {
   methods: {
     togglePlayback() {
       if (this.player.paused) {
-        // If the audio is paused, play the song
         this.play(this.current)
       } else {
-        // If the audio is playing, pause the song
         this.pause()
       }
     },
@@ -105,59 +103,51 @@ export default {
         return
       }
 
-      this.index = index // Update the index
+      this.index = index
 
       if (this.player.src !== song.src) {
-        // Load new song
         this.current = song
         this.player.src = this.current.src
       }
 
-      // Set the playback position to the stored current time
       this.player.currentTime = this.currentTime
 
-      // Check if the audio is paused, then play
       if (this.player.paused) {
-        // Play the song
         this.player.play()
-        // Update playback status
         this.isPlaying = true
       }
     },
     pause() {
       this.player.pause()
-      // Store the current playback position
       this.currentTime = this.player.currentTime
       this.isPlaying = false
     },
     next() {
       this.index = (this.index + 1) % this.songs.length
       this.current = this.songs[this.index]
-      this.resetSong() // Reset song before playing the next one
+      this.resetSong()
     },
     prev() {
       this.index = (this.index - 1 + this.songs.length) % this.songs.length
       this.current = this.songs[this.index]
-      this.resetSong() // Reset song before playing the previous one
+      this.resetSong()
     },
     stop() {
       this.player.pause()
-      this.player.currentTime = 0 // Reset current time to 0
+      this.player.currentTime = 0
       this.isPlaying = false
     },
     resetSong(song) {
       if (song) {
-        // If a specific song is provided, reset that song
         if (this.current.src === song.src) {
-          this.player.currentTime = 0 // Reset current time to 0
-          this.player.load() // Reload the audio file
-          this.isPlaying = false // Set isPlaying to false
+          this.player.currentTime = 0
+          this.player.load()
+          this.isPlaying = false
         }
       } else {
-        // If no specific song is provided, reset the currently playing song
-        this.player.currentTime = 0 // Reset current time to 0
-        this.player.load() // Reload the audio file
-        this.isPlaying = false // Set isPlaying to false
+        this.player.currentTime = 0
+        this.player.load()
+        this.isPlaying = false
       }
     },
     updateTime() {
@@ -165,23 +155,36 @@ export default {
       this.duration = this.player.duration
     },
     songEnded() {
-      // Automatically play the next song when the current one ends
       this.next()
     },
     stopPlaybackAndResetState() {
       this.player.pause()
       this.player.currentTime = 0
       this.isPlaying = false
+    },
+    seek(event) {
+      const progressBar = event.currentTarget
+      const clickPosition = event.clientX - progressBar.getBoundingClientRect().left
+      const newWidth = progressBar.clientWidth
+      const newTime = (clickPosition / newWidth) * this.duration
+
+      this.player.currentTime = newTime
+      this.currentTime = newTime
+
+      if (!this.isPlaying) {
+        this.player.pause()
+      }
     }
   },
   created() {
-    this.current = this.songs[0] // Set current to the first song in the playlist
+    this.current = this.songs[0]
     this.player.addEventListener('timeupdate', this.updateTime)
     this.player.addEventListener('ended', this.songEnded)
+    this.player.addEventListener('loadedmetadata', () => {
+      this.duration = this.player.duration
+    })
 
-    // Add a navigation guard to handle route changes
     this.$router.beforeEach((to, from, next) => {
-      // Stop playback and reset state when navigating away
       this.stopPlaybackAndResetState()
       next()
     })
@@ -270,11 +273,12 @@ button {
 
 .progress-bar {
   width: 50%;
-  height: 0.3rem;
+  height: 0.7rem;
   background-color: rgba(255, 255, 255, 0.5);
   margin: 1.6rem auto;
   border-radius: 0.6rem;
   --progress: 0;
+  cursor: pointer;
 }
 
 .progress {
