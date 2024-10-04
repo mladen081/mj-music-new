@@ -50,50 +50,26 @@ export default {
       currentTime: 0,
       duration: 0,
       songs: [
-        {
-          title: '1. Song 1',
-          artist: 'A T',
-          src: '/s1.mp3'
-        },
-        {
-          title: '2. Song 2',
-          artist: 'A T',
-          src: '/s2.mp3'
-        },
-        {
-          title: '3. Song 3',
-          artist: 'A T',
-          src: '/s3.mp3'
-        },
-        {
-          title: '4. Song 4',
-          artist: 'M G',
-          src: '/s4.mp3'
-        },
-        {
-          title: '5. Song 5',
-          artist: 'M G',
-          src: '/s5.mp3'
-        }
+        { title: '1. Song 1', artist: 'A T', src: '/s1.mp3' },
+        { title: '2. Song 2', artist: 'A T', src: '/s2.mp3' },
+        { title: '3. Song 3', artist: 'A T', src: '/s3.mp3' },
+        { title: '4. Song 4', artist: 'M G', src: '/s4.mp3' },
+        { title: '5. Song 5', artist: 'M G', src: '/s5.mp3' }
       ],
       player: new Audio()
     }
   },
   computed: {
     progress() {
-      if (this.duration) {
-        return (this.currentTime / this.duration) * 100
-      } else {
-        return 0
-      }
+      return this.duration ? (this.currentTime / this.duration) * 100 : 0
     }
   },
   methods: {
     togglePlayback() {
-      if (this.player.paused) {
-        this.play(this.current)
-      } else {
+      if (this.isPlaying) {
         this.pause()
+      } else {
+        this.play(this.current)
       }
     },
     play(song) {
@@ -105,32 +81,48 @@ export default {
 
       this.index = index
 
-      if (this.player.src !== song.src) {
+      // If the song is already loaded
+      if (this.player.src === song.src) {
+        if (this.player.paused) {
+          this.player.play()
+          this.isPlaying = true
+        }
+      } else {
+        // Load a new song
         this.current = song
         this.player.src = this.current.src
-      }
+        this.player.currentTime = this.currentTime // Keep the current time if resuming
 
-      this.player.currentTime = this.currentTime
-
-      if (this.player.paused) {
-        this.player.play()
-        this.isPlaying = true
+        this.player
+          .play()
+          .then(() => {
+            this.isPlaying = true
+          })
+          .catch((error) => {
+            console.error('Error playing the song:', error)
+          })
       }
     },
     pause() {
       this.player.pause()
-      this.currentTime = this.player.currentTime
+      this.currentTime = this.player.currentTime // Save the current time
       this.isPlaying = false
     },
     next() {
-      this.index = (this.index + 1) % this.songs.length
-      this.current = this.songs[this.index]
-      this.resetSong()
+      this.index = (this.index + 1) % this.songs.length // Move to the next song
+      this.current = this.songs[this.index] // Update current song
+      this.player.currentTime = 0 // Reset the current time to 0
+
+      // Short timeout to ensure proper playback
+      setTimeout(() => {
+        this.play(this.current) // Play the current song
+      }, 100) // 100ms delay
     },
     prev() {
-      this.index = (this.index - 1 + this.songs.length) % this.songs.length
-      this.current = this.songs[this.index]
-      this.resetSong()
+      this.index = (this.index - 1 + this.songs.length) % this.songs.length // Move to the previous song
+      this.current = this.songs[this.index] // Update current song
+      this.player.currentTime = 0 // Reset the current time to 0
+      this.play(this.current) // Play the previous song
     },
     stop() {
       this.player.pause()
@@ -141,12 +133,10 @@ export default {
       if (song) {
         if (this.current.src === song.src) {
           this.player.currentTime = 0
-          this.player.load()
           this.isPlaying = false
         }
       } else {
         this.player.currentTime = 0
-        this.player.load()
         this.isPlaying = false
       }
     },
