@@ -164,7 +164,7 @@ header nav {
 header nav ul,
 header nav ul .link,
 header nav .branding .link {
-  font-weight: 700;
+  font-weight: 400;
   color: #fff;
   list-style: none;
   text-decoration: none;

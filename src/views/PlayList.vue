@@ -197,7 +197,7 @@ export default {
 
 <style scoped>
 .song-title span {
-  font-weight: 700;
+  font-weight: 400;
 }
 .controls {
   flex-direction: column;
@@ -251,7 +251,7 @@ button {
   color: #fff;
   padding: 0.3rem;
   font-size: 1.8rem;
-  font-weight: 700;
+  font-weight: 400;
   cursor: pointer;
   margin: 1.8rem 0 1.8rem 0;
   padding: 1rem 0;
@@ -271,7 +271,7 @@ button {
 .progress-bar {
   width: 50%;
   height: 0.3rem;
-  background-color: rgba(255, 212, 50, 0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   margin: 1.6rem auto;
   border-radius: 0.6rem;
   --progress: 0;
@@ -279,7 +279,7 @@ button {
 
 .progress {
   height: 100%;
-  background-color: #ffd432;
+  background-color: #fff;
   border-radius: 0.6rem;
   width: var(--progress);
 }
