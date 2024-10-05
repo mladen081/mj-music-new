@@ -91,7 +91,7 @@ export default {
         // Load a new song
         this.current = song
         this.player.src = this.current.src
-        this.player.currentTime = this.currentTime // Keep the current time if resuming
+        this.player.currentTime = 0 // Reset to start of the new song
 
         this.player
           .play()
