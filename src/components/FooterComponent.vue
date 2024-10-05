@@ -1,12 +1,27 @@
 <template>
   <footer>
     <p>Just Music 2024 by Uros</p>
+    <ToggleSwitch @toggle="toggleColor" class="toggle-element" />
   </footer>
 </template>
 
-<script>
-export default {
-  name: 'FooterComponent'
+<script setup>
+import { ref } from 'vue'
+import ToggleSwitch from '@/components/ToggleSwitch.vue'
+
+const isGreen = ref(false)
+
+const toggleColor = (value) => {
+  isGreen.value = value
+
+  // Update CSS variables based on the toggle state
+  if (isGreen.value) {
+    document.documentElement.style.setProperty('--yellow-color', '#4FD2EE') // green
+    document.documentElement.style.setProperty('--green-color', '#ffd432') // yellow
+  } else {
+    document.documentElement.style.setProperty('--yellow-color', '#ffd432') // yellow
+    document.documentElement.style.setProperty('--green-color', '#4FD2EE') // green
+  }
 }
 </script>
 
@@ -19,7 +34,11 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #141417;
-  color: #fff;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.toggle-element {
+  margin-left: 2rem;
 }
 </style>

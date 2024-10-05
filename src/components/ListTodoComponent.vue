@@ -120,7 +120,7 @@ export default {
 <style scoped>
 .item {
   padding: 4rem 0;
-  border-bottom: 3px solid #ffd432;
+  border-bottom: 3px solid var(--yellow-color);
 }
 
 .sub-item {

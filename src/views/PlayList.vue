@@ -212,7 +212,7 @@ export default {
 
 .fa:hover,
 .fa:focus {
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 
 button {
@@ -250,12 +250,12 @@ button {
   padding: 1rem 0;
 }
 .playlist .song:hover {
-  border-color: #ffd432;
-  color: #ffd432;
+  border-color: var(--yellow-color);
+  color: var(--yellow-color);
 }
 
 .playlist .song.playing {
-  background-color: #ffd432;
+  background-color: var(--yellow-color);
   color: #141417;
   border: 0.2rem #fff;
   border-radius: 0.6rem;

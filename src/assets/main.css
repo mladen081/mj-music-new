@@ -1,18 +1,32 @@
 @import './base.css';
 
+:root {
+  --primary-color: #141417;
+  --secondary-color: #fff;
+  --yellow-color: #ffd432;
+  --green-color: #4fd2ee;
+}
+
+.some-color {
+  background-color: var(--yellow-color);
+}
+
+.some-color.green {
+  background-color: var(--green-color);
+}
 main {
   padding-top: 4rem;
 }
 
 h1 {
-  color: #fff;
+  color: var(--secondary-color);
   font-size: 5rem;
   text-align: center;
   font-weight: 400;
 }
 
 h2 {
-  color: #ffd432;
+  color: var(--yellow-color);
   font-size: 3rem;
   text-align: center;
   font-family: 'Marck Script', cursive;
@@ -31,9 +45,9 @@ a {
 }
 
 .container {
-  background-color: #141417;
+  background-color: var(--primary-color);
   padding: 4rem 12rem;
-  color: #fff;
+  color: var(--secondary-color);
 }
 
 .btn-holder {
@@ -49,11 +63,11 @@ button {
   margin-bottom: 2rem;
   font-size: 2rem;
   padding: 0.7rem 2rem;
-  border: 2px solid #fff;
+  border: 2px solid var(--secondary-color);
   border-radius: 0.6rem;
-  background-color: #fff;
+  background-color: var(--secondary-color);
   width: 18rem;
-  color: #141417;
+  color: var(--primary-color);
 }
 
 button:disabled {
@@ -62,8 +76,8 @@ button:disabled {
 
 button:hover {
   background-color: transparent;
-  border: 2px solid #ffd432;
-  color: #ffd432;
+  border: 2px solid var(--yellow-color);
+  color: var(--yellow-color);
 }
 
 .form-container {
@@ -91,7 +105,7 @@ input,
 select,
 textarea {
   margin: 1rem;
-  background-color: #fff !important;
+  background-color: var(--secondary-color) !important;
   padding: 0.7rem;
   width: 33rem;
   border: 2px solid #000;
@@ -101,7 +115,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 2px solid #ffd432;
+  outline: 2px solid var(--yellow-color);
 }
 
 ::placeholder {
@@ -113,7 +127,7 @@ textarea:focus {
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #ffd432;
+  color: var(--yellow-color);
   animation: fadeOut 2s infinite alternate;
 }
 
@@ -121,14 +135,14 @@ textarea:focus {
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 
 .error-message {
   margin-top: 2rem;
   margin-bottom: 2rem;
   font-size: 2rem;
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 
 @keyframes fadeOut {
@@ -147,19 +161,19 @@ textarea:focus {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 0.5rem #ffd432;
+  box-shadow: inset 0 0 0.5rem var(--secondary-color);
   border-radius: 1rem;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 212, 50, 0.5);
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 1rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #ffd432;
+  background: var(--yellow-color);
 }
 
 @media (max-width: 1600px) {

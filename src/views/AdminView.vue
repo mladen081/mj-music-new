@@ -68,7 +68,7 @@ const removeUser = async (userId) => {
 .item {
   width: 50%;
   margin: 3rem auto;
-  border-bottom: 1px solid #ffd432;
+  border-bottom: 1px solid var(--yellow-color);
 }
 .sub-item {
   margin: 3rem 0;
@@ -78,7 +78,7 @@ const removeUser = async (userId) => {
   .item {
     width: 90%;
     margin: 3rem auto;
-    border-bottom: 1px solid #ffd432;
+    border-bottom: 1px solid var(--yellow-color);
   }
 }
 </style>

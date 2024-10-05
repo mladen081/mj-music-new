@@ -188,7 +188,7 @@ header nav .branding .link {
 header nav ul li .link:hover,
 header nav .branding .link:hover header nav ul li .link:focus,
 header nav .branding .link:focus {
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 
 header nav .navigation {
@@ -200,13 +200,13 @@ header nav .navigation {
 }
 
 header nav .navigation li.active-tab .link {
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 
 header nav .dropdown-nav li .link:hover,
 header nav .dropdown-nav li .link:focus,
 header nav .dropdown-nav li.active-tab .link {
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 
 header nav .icon {
@@ -272,6 +272,6 @@ header nav .mobile-nav-enter-to {
 }
 
 header nav ul li .active-tab {
-  color: #ffd432;
+  color: var(--yellow-color);
 }
 </style>
