@@ -2,7 +2,7 @@
   <header :class="{ 'scrolled-nav': scrolledNav }">
     <nav>
       <div class="branding">
-        <router-link class="link" to="/">MJ Music</router-link>
+        <router-link class="link" exact-active-class="active-tab" to="/">MJ Music</router-link>
       </div>
 
       <ul v-show="!mobile" class="navigation">
@@ -186,7 +186,8 @@ header nav .branding .link {
 }
 
 header nav ul li .link:hover,
-header nav .branding .link:hover header nav ul li .link:focus,
+header nav .branding .link:hover,
+header nav ul li .link:focus,
 header nav .branding .link:focus {
   color: var(--yellow-color);
 }
@@ -271,7 +272,8 @@ header nav .mobile-nav-enter-to {
   background-color: #141417;
 }
 
-header nav ul li .active-tab {
+header nav ul li .active-tab,
+header nav .branding .active-tab {
   color: var(--yellow-color);
 }
 </style>

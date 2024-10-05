@@ -44,7 +44,7 @@ const toggleColor = (event) => {
   transition:
     background-color 0.4s,
     transform 0.4s;
-  border-radius: 1rem; /* Rounded corners */
+  border-radius: 0.6rem; /* Rounded corners */
 }
 
 .slider:before {
