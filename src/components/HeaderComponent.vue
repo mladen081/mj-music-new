@@ -37,13 +37,8 @@
         </li>
       </ul>
 
-      <div class="icon">
-        <i
-          v-show="mobile"
-          class="far fa-bars"
-          :class="{ 'icon-active': mobileNav }"
-          @click="toggleMobileNav"
-        ></i>
+      <div class="icon" @click.stop="toggleMobileNav">
+        <i v-show="mobile" class="far fa-bars" :class="{ 'icon-active': mobileNav }"></i>
       </div>
 
       <transition name="mobile-nav">
@@ -63,7 +58,6 @@
               >Contact</router-link
             >
           </li>
-
           <li v-if="isAuth">
             <router-link class="link" exact-active-class="active-tab" to="/todos"
               >Todos</router-link
@@ -115,32 +109,43 @@ const mobile = ref(false)
 const mobileNav = ref(false)
 const windowWidth = ref(window.innerWidth)
 
+// Toggle mobile navigation
 const toggleMobileNav = () => {
   mobileNav.value = !mobileNav.value
 }
 
-const updateScroll = () => {
-  const scrollPosition = window.scrollY
-  scrolledNav.value = scrollPosition > 50
+// Handle click events outside of navigation links
+const handleClickOutside = (event) => {
+  if (!event.target.closest('router-link')) {
+    mobileNav.value = false // Close mobile nav when clicking outside
+  }
 }
 
+// Update scroll position
+const updateScroll = () => {
+  scrolledNav.value = window.scrollY > 50
+}
+
+// Check screen size
 const checkScreen = () => {
   windowWidth.value = window.innerWidth
   mobile.value = windowWidth.value <= 767
   if (!mobile.value) {
-    mobileNav.value = false
+    mobileNav.value = false // Close mobile nav if on larger screens
   }
 }
 
 onMounted(() => {
   window.addEventListener('resize', checkScreen)
   window.addEventListener('scroll', updateScroll)
+  window.addEventListener('click', handleClickOutside) // Global click listener
   checkScreen()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('resize', checkScreen)
   window.removeEventListener('scroll', updateScroll)
+  window.removeEventListener('click', handleClickOutside) // Clean up listener
 })
 </script>
 
@@ -181,6 +186,7 @@ header nav .branding .link {
   padding-bottom: 0.4rem;
   border-bottom: 0.1rem solid transparent;
 }
+
 header nav .branding .link {
   padding-left: 1rem;
 }
@@ -249,6 +255,7 @@ header nav .dropdown-nav li {
   margin-left: 0;
   margin-top: 1.5rem;
 }
+
 header nav .dropdown-nav li .link {
   color: #fff;
   padding-left: 0.6rem;
