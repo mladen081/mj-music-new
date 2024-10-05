@@ -201,7 +201,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #141417;
+  background-color: var(--primary-color);
   z-index: 1000;
 }
 .fa {
@@ -239,7 +239,7 @@ button {
 .playlist .song {
   display: block;
   width: 100%;
-  background-color: #141417;
+  background-color: var(--primary-color);
   border: 1px solid #fff;
   color: #fff;
   padding: 0.3rem;
@@ -256,7 +256,7 @@ button {
 
 .playlist .song.playing {
   background-color: var(--yellow-color);
-  color: #141417;
+  color: var(--primary-color);
   border: 0.2rem #fff;
   border-radius: 0.6rem;
 }

@@ -18,9 +18,11 @@ const toggleColor = (value) => {
   if (isGreen.value) {
     document.documentElement.style.setProperty('--yellow-color', '#4FD2EE') // green
     document.documentElement.style.setProperty('--green-color', '#ffd432') // yellow
+    document.documentElement.style.setProperty('--primary-color', '#1A1A1A')
   } else {
     document.documentElement.style.setProperty('--yellow-color', '#ffd432') // yellow
     document.documentElement.style.setProperty('--green-color', '#4FD2EE') // green
+    document.documentElement.style.setProperty('--primary-color', '#141417')
   }
 }
 </script>

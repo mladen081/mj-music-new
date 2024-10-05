@@ -6,14 +6,6 @@
   --yellow-color: #ffd432;
   --green-color: #4fd2ee;
 }
-
-.some-color {
-  background-color: var(--yellow-color);
-}
-
-.some-color.green {
-  background-color: var(--green-color);
-}
 main {
   padding-top: 4rem;
 }

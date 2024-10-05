@@ -149,7 +149,7 @@ header {
   width: 100%;
   position: fixed;
   color: #fff;
-  background-color: #141417;
+  background-color: var(--primary-color);
 }
 
 header nav {
@@ -269,7 +269,7 @@ header nav .mobile-nav-enter-to {
 }
 
 .scrolled-nav {
-  background-color: #141417;
+  background-color: var(--primary-color);
 }
 
 header nav ul li .active-tab,

@@ -1,6 +1,7 @@
 <template>
   <label class="toggle-switch">
-    <input type="checkbox" :checked="isGreen" @change="toggleColor" />
+    <label aria-label="toggle" for="toggle" style="visibility: hidden">toggle</label>
+    <input id="toggle" name="toggle" type="checkbox" :checked="isGreen" @change="toggleColor" />
     <span class="slider"></span>
   </label>
 </template>
