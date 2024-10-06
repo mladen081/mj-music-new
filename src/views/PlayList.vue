@@ -18,9 +18,9 @@
       </section>
       <section class="player">
         <div class="controls">
-          <h2 class="song-title" @click="resetSong(current)">
+          <p class="song-title" @click="resetSong(current)">
             {{ current.title }} - {{ current.artist }}
-          </h2>
+          </p>
           <div class="progress-bar" @click="seek">
             <div class="progress" :style="{ width: progress + '%' }"></div>
           </div>
@@ -180,15 +180,17 @@ export default {
 </script>
 
 <style scoped>
-.song-title span {
+.song-title {
   font-weight: 200;
+  color: var(--yellow-color);
+  margin-bottom: 1rem;
 }
 .controls {
   flex-direction: column;
   width: 100%;
   position: fixed;
   bottom: 5rem;
-  padding-top: 2rem;
+  padding: 2rem 0;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -196,8 +198,8 @@ export default {
   z-index: 1000;
 }
 .fa {
-  font-size: 3rem;
-  margin: 3rem;
+  font-size: 2.5rem;
+  margin: 1rem 2rem;
   color: #fff;
 }
 
