@@ -2,7 +2,6 @@
   <main>
     <div class="home-cont pt-128">
       <h1>Play Time</h1>
-
       <section class="playlist all">
         <h2>The Playlist</h2>
         <button
@@ -17,7 +16,6 @@
           {{ song.title }} - {{ song.artist }}
         </button>
       </section>
-
       <section class="player">
         <div class="controls">
           <h2 class="song-title" @click="resetSong(current)">
@@ -78,9 +76,7 @@ export default {
         console.error('Song not found in the playlist')
         return
       }
-
       this.index = index
-
       // If the song is already loaded
       if (this.player.src === song.src) {
         if (this.player.paused) {
@@ -91,8 +87,7 @@ export default {
         // Load a new song
         this.current = song
         this.player.src = this.current.src
-        this.player.currentTime = 0 // Reset to start of the new song
-
+        this.player.currentTime = this.currentTime // Keep the current time if resuming
         this.player
           .play()
           .then(() => {
@@ -112,7 +107,6 @@ export default {
       this.index = (this.index + 1) % this.songs.length // Move to the next song
       this.current = this.songs[this.index] // Update current song
       this.player.currentTime = 0 // Reset the current time to 0
-
       // Short timeout to ensure proper playback
       setTimeout(() => {
         this.play(this.current) // Play the current song
@@ -157,10 +151,8 @@ export default {
       const clickPosition = event.clientX - progressBar.getBoundingClientRect().left
       const newWidth = progressBar.clientWidth
       const newTime = (clickPosition / newWidth) * this.duration
-
       this.player.currentTime = newTime
       this.currentTime = newTime
-
       if (!this.isPlaying) {
         this.player.pause()
       }
@@ -173,7 +165,6 @@ export default {
     this.player.addEventListener('loadedmetadata', () => {
       this.duration = this.player.duration
     })
-
     this.$router.beforeEach((to, from, next) => {
       this.stopPlaybackAndResetState()
       next()
