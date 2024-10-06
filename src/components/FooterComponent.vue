@@ -36,7 +36,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--primary-color);
+  background-color: #090909;
   color: var(--secondary-color);
 }
 

@@ -181,7 +181,7 @@ export default {
 
 <style scoped>
 .song-title span {
-  font-weight: 400;
+  font-weight: 200;
 }
 .controls {
   flex-direction: column;
@@ -218,7 +218,7 @@ button {
 .playlist.all {
   padding: 1rem;
   border-radius: 0.6rem;
-  border: 0.2rem solid #fff;
+  /* border: 0.2rem solid #fff; */
   margin: 3.6rem auto;
   width: 50%;
   height: 40vh;
@@ -231,11 +231,11 @@ button {
   display: block;
   width: 100%;
   background-color: var(--primary-color);
-  border: 1px solid #fff;
+  /* border: 1px solid #fff; */
   color: #fff;
   padding: 0.3rem;
   font-size: 1.8rem;
-  font-weight: 400;
+  font-weight: 200;
   cursor: pointer;
   margin: 1.8rem 0 1.8rem 0;
   padding: 1rem 0;

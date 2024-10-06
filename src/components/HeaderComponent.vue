@@ -154,7 +154,7 @@ header {
   width: 100%;
   position: fixed;
   color: #fff;
-  background-color: var(--primary-color);
+  background-color: #090909;
 }
 
 header nav {
@@ -169,7 +169,7 @@ header nav {
 header nav ul,
 header nav ul .link,
 header nav .branding .link {
-  font-weight: 400;
+  font-weight: 200;
   color: #fff;
   list-style: none;
   text-decoration: none;

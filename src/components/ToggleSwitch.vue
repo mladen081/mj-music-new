@@ -24,8 +24,8 @@ const toggleColor = (event) => {
 .toggle-switch {
   position: relative;
   display: inline-block;
-  width: 5rem;
-  height: 3rem;
+  width: 4rem;
+  height: 2rem;
 }
 
 .toggle-switch input {
@@ -41,11 +41,11 @@ const toggleColor = (event) => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: var(--yellow-color); /* Default color */
+  background-color: var(--yellow-color);
   transition:
     background-color 0.4s,
     transform 0.4s;
-  border-radius: 0.6rem; /* Rounded corners */
+  border-radius: 0.6rem;
 }
 
 .slider:before {
@@ -54,17 +54,17 @@ const toggleColor = (event) => {
   height: 1.5rem;
   width: 1.5rem;
   left: 0.4rem;
-  bottom: 0.8rem;
-  background-color: var(--primary-color); /* Knob color */
+  bottom: 0.23rem;
+  background-color: var(--primary-color);
   transition: transform 0.4s;
-  border-radius: 50%; /* Make the knob round */
+  border-radius: 0.6rem;
 }
 
 input:checked + .slider {
-  background-color: var(--yellow-color); /* Change color when checked */
+  background-color: var(--yellow-color);
 }
 
 input:checked + .slider:before {
-  transform: translateX(2rem); /* Move the knob to the right */
+  transform: translateX(1.7rem);
 }
 </style>
