@@ -280,7 +280,8 @@ header nav .mobile-nav-enter-to {
 }
 
 header nav ul li .active-tab,
-header nav .branding .active-tab {
+header nav .branding .active-tab,
+header nav .dropdown-nav li .active-tab {
   color: var(--yellow-color);
 }
 </style>
