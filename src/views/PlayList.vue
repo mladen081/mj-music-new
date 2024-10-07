@@ -25,6 +25,9 @@
         <div class="controls">
           <p class="song-title" @click="resetSong(current)">
             {{ current.title }} - {{ current.artist }}
+            <span class="time-display">{{ formattedCurrentTime }}</span>
+            <!-- <span class="time-display">/</span>
+            <span class="time-display">{{ formattedDuration }}</span> -->
           </p>
           <div class="progress-bar" @click="seek">
             <div class="progress" :style="{ width: progress + '%' }"></div>
@@ -52,6 +55,8 @@ export default {
       isPlaying: false,
       currentTime: 0,
       duration: 0,
+      formattedCurrentTime: '0:00',
+      formattedDuration: '0:00',
       songs: [
         { title: '1. Song 1', artist: 'A T', src: '/s1.mp3' },
         { title: '2. Song 2', artist: 'A T', src: '/s2.mp3' },
@@ -68,6 +73,17 @@ export default {
     }
   },
   methods: {
+    formatTime(time) {
+      const minutes = Math.floor(time / 60)
+      const seconds = Math.floor(time % 60)
+      return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`
+    },
+    updateTime() {
+      this.currentTime = this.player.currentTime
+      this.duration = this.player.duration
+      this.formattedCurrentTime = this.formatTime(this.currentTime)
+      this.formattedDuration = this.formatTime(this.duration)
+    },
     togglePlayback() {
       if (this.isPlaying) {
         this.pause()
@@ -135,10 +151,6 @@ export default {
         this.player.currentTime = 0
         this.isPlaying = false
       }
-    },
-    updateTime() {
-      this.currentTime = this.player.currentTime
-      this.duration = this.player.duration
     },
     songEnded() {
       this.next()
@@ -255,11 +267,9 @@ button {
   animation: moveAnimation 2s linear infinite; /* Adjust the duration */
   color: var(--yellow-color);
 }
-
 .indicator .fa {
-  color: var(--yellow-color); /* Koristi varijablu za žutu boju */
+  color: var(--yellow-color); /* Use variable for yellow color */
 }
-
 @keyframes moveAnimation {
   0% {
     transform: translate(-5px, -50%);
@@ -284,6 +294,9 @@ button {
   background-color: #fff;
   border-radius: 0.6rem;
   width: var(--progress);
+}
+.time-display {
+  margin-left: 3rem;
 }
 @media (max-width: 767px) {
   .playlist.all,
