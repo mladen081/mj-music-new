@@ -155,6 +155,7 @@ header {
   position: fixed;
   color: #fff;
   background-color: #090909;
+  z-index: 100;
 }
 
 header nav {
@@ -192,9 +193,7 @@ header nav .branding .link {
 }
 
 header nav ul li .link:hover,
-header nav .branding .link:hover,
-header nav ul li .link:focus,
-header nav .branding .link:focus {
+header nav .branding .link:hover {
   color: var(--yellow-color);
 }
 

@@ -23,21 +23,19 @@
       </section>
       <section class="player">
         <div class="controls">
-          <p class="song-title" @click="resetSong(current)">
-            {{ current.title }} - {{ current.artist }}
-            <span class="time-display">{{ formattedCurrentTime }}</span>
-            <!-- <span class="time-display">/</span>
-            <span class="time-display">{{ formattedDuration }}</span> -->
-          </p>
-          <div class="progress-bar" @click="seek">
-            <div class="progress" :style="{ width: progress + '%' }"></div>
-          </div>
           <div>
             <i class="fa fa-angle-double-left" aria-hidden="true" @click="prev"></i>
             <i class="fa fa-play" aria-hidden="true" v-if="!isPlaying" @click="play(current)"></i>
             <i class="fa fa-pause" aria-hidden="true" v-else @click="togglePlayback"></i>
             <i class="fa fa-stop" aria-hidden="true" @click="stop"></i>
             <i class="fa fa-angle-double-right" aria-hidden="true" @click="next"></i>
+          </div>
+          <div class="progress-bar" @click="seek">
+            <div class="progress" :style="{ width: progress + '%' }"></div>
+          </div>
+          <div class="time-displays">
+            <span class="time-display">{{ formattedCurrentTime }}</span>
+            <span class="time-display">{{ formattedDuration }}</span>
           </div>
         </div>
       </section>
@@ -245,10 +243,10 @@ button {
   background-color: var(--primary-color);
   color: #fff;
   padding: 0.3rem;
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: 200;
   cursor: pointer;
-  margin: 1.8rem 0;
+  margin: 1.5rem 0;
   padding: 1rem 0;
   position: relative;
 }
@@ -285,7 +283,7 @@ button {
   width: 50%;
   height: 0.7rem;
   background-color: rgba(255, 255, 255, 0.5);
-  margin: 1.6rem auto;
+  margin: 1rem auto;
   border-radius: 0.6rem;
   cursor: pointer;
 }
@@ -295,12 +293,22 @@ button {
   border-radius: 0.6rem;
   width: var(--progress);
 }
+.time-displays {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0.2rem auto;
+}
 .time-display {
-  margin-left: 3rem;
+  color: var(--yellow-color);
+  font-size: 1.2rem;
 }
 @media (max-width: 767px) {
   .playlist.all,
   .progress-bar {
+    width: 84%;
+  }
+  .time-displays {
     width: 84%;
   }
 }
