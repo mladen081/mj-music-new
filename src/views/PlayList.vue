@@ -9,11 +9,16 @@
           :key="song.src"
           @click="play(song)"
           :class="{
-            'song playing': song.src === current.src && isPlaying,
-            song: true
+            song: true,
+            playing: song.src === current.src && isPlaying
           }"
         >
-          {{ song.title }} - {{ song.artist }}
+          <span class="song-info">
+            <span v-if="song.src === current.src && isPlaying" class="indicator animated">
+              <i class="fa fa-music"></i>
+            </span>
+            {{ song.title }} - {{ song.artist }}
+          </span>
         </button>
       </section>
       <section class="player">
@@ -77,17 +82,15 @@ export default {
         return
       }
       this.index = index
-      // If the song is already loaded
       if (this.player.src === song.src) {
         if (this.player.paused) {
           this.player.play()
           this.isPlaying = true
         }
       } else {
-        // Load a new song
         this.current = song
         this.player.src = this.current.src
-        this.player.currentTime = this.currentTime // Keep the current time if resuming
+        this.player.currentTime = this.currentTime
         this.player
           .play()
           .then(() => {
@@ -100,23 +103,22 @@ export default {
     },
     pause() {
       this.player.pause()
-      this.currentTime = this.player.currentTime // Save the current time
+      this.currentTime = this.player.currentTime
       this.isPlaying = false
     },
     next() {
-      this.index = (this.index + 1) % this.songs.length // Move to the next song
-      this.current = this.songs[this.index] // Update current song
-      this.player.currentTime = 0 // Reset the current time to 0
-      // Short timeout to ensure proper playback
+      this.index = (this.index + 1) % this.songs.length
+      this.current = this.songs[this.index]
+      this.player.currentTime = 0
       setTimeout(() => {
-        this.play(this.current) // Play the current song
-      }, 100) // 100ms delay
+        this.play(this.current)
+      }, 100)
     },
     prev() {
-      this.index = (this.index - 1 + this.songs.length) % this.songs.length // Move to the previous song
-      this.current = this.songs[this.index] // Update current song
-      this.player.currentTime = 0 // Reset the current time to 0
-      this.play(this.current) // Play the previous song
+      this.index = (this.index - 1 + this.songs.length) % this.songs.length
+      this.current = this.songs[this.index]
+      this.player.currentTime = 0
+      this.play(this.current)
     },
     stop() {
       this.player.pause()
@@ -202,12 +204,10 @@ export default {
   margin: 1rem 2rem;
   color: #fff;
 }
-
 .fa:hover,
 .fa:focus {
   color: var(--yellow-color);
 }
-
 button {
   appearance: none;
   background: none;
@@ -216,11 +216,9 @@ button {
   cursor: pointer;
   color: #fff;
 }
-
 .playlist.all {
   padding: 1rem;
   border-radius: 0.6rem;
-  /* border: 0.2rem solid #fff; */
   margin: 3.6rem auto;
   width: 50%;
   height: 40vh;
@@ -233,44 +231,60 @@ button {
   display: block;
   width: 100%;
   background-color: var(--primary-color);
-  /* border: 1px solid #fff; */
   color: #fff;
   padding: 0.3rem;
   font-size: 1.8rem;
   font-weight: 200;
   cursor: pointer;
-  margin: 1.8rem 0 1.8rem 0;
+  margin: 1.8rem 0;
   padding: 1rem 0;
+  position: relative;
 }
-.playlist .song:hover {
-  border-color: var(--yellow-color);
+.playlist .song.playing {
+  color: var(--yellow-color);
+}
+.song-info {
+  position: relative;
+}
+.indicator {
+  position: absolute;
+  left: -7rem; /* 10px left from the song number */
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 2rem; /* Adjust size of the icon */
+  animation: moveAnimation 2s linear infinite; /* Adjust the duration */
   color: var(--yellow-color);
 }
 
-.playlist .song.playing {
-  background-color: var(--yellow-color);
-  color: var(--primary-color);
-  border: 0.2rem #fff;
-  border-radius: 0.6rem;
+.indicator .fa {
+  color: var(--yellow-color); /* Koristi varijablu za žutu boju */
 }
 
+@keyframes moveAnimation {
+  0% {
+    transform: translate(-5px, -50%);
+  }
+  50% {
+    transform: translate(5px, -50%);
+  }
+  100% {
+    transform: translate(-5px, -50%);
+  }
+}
 .progress-bar {
   width: 50%;
   height: 0.7rem;
   background-color: rgba(255, 255, 255, 0.5);
   margin: 1.6rem auto;
   border-radius: 0.6rem;
-  --progress: 0;
   cursor: pointer;
 }
-
 .progress {
   height: 100%;
   background-color: #fff;
   border-radius: 0.6rem;
   width: var(--progress);
 }
-
 @media (max-width: 767px) {
   .playlist.all,
   .progress-bar {
